@@ -1,0 +1,52 @@
+
+1. What is encapsulation?
+Encapsulation is the concept of wrapping data (variables) and code (methods) together as a single unit. In Java, it is achieved by declaring variables as private and providing public getter and setter methods to access and modify them. This helps in data hiding and maintaining control over the data.
+
+2. How are ArrayLists different from arrays?
+- Arrays have a fixed size, while ArrayLists are resizable.
+- Arrays can store primitive data types and objects; ArrayLists can only store objects.
+- ArrayLists provide more flexible methods (like add, remove, contains), whereas arrays do not.
+
+3. How to sort an ArrayList?
+You can sort an ArrayList using `Collections.sort()` method.
+Example:
+```java
+ArrayList<String> list = new ArrayList<>();
+Collections.sort(list);
+```
+
+4. What is constructor overloading?
+Constructor overloading means having more than one constructor in a class with different parameter lists. This allows creating objects in different ways.
+Example:
+```java
+class MyClass {
+    MyClass() {}
+    MyClass(int a) {}
+    MyClass(String s) {}
+}
+```
+
+5. How does garbage collection work in Java?
+Garbage collection in Java is the process of automatically freeing memory by deleting objects that are no longer reachable in the program. The JVM runs a garbage collector to identify and remove these unused objects to prevent memory leaks.
+
+6. Why do we use getters and setters?
+Getters and setters are used to access and update the value of private fields. They provide controlled access, help enforce encapsulation, and allow validation logic during value assignment.
+
+7. What is a static variable?
+A static variable belongs to the class rather than any specific instance. It is shared among all instances of that class. Changing the value of a static variable in one instance affects all other instances.
+
+8. What is the use of final keyword?
+- For variables: It makes the variable constant (value can't be changed once assigned).
+- For methods: It prevents method overriding.
+- For classes: It prevents inheritance.
+
+9. Difference between compile-time and runtime errors?
+- Compile-time errors occur when the code is being compiled (e.g., syntax errors, missing semicolons).
+- Runtime errors occur during program execution (e.g., division by zero, null pointer exceptions).
+
+10. What are access modifiers?
+Access modifiers define the scope of access to classes, variables, and methods. In Java, they are:
+- `public`: accessible from anywhere.
+- `private`: accessible only within the class.
+- `protected`: accessible within the same package and subclasses.
+- (default): accessible within the same package (no modifier specified).
