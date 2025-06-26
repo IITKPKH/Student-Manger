@@ -1,0 +1,119 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class nQueen {
+    static Scanner scanner = new Scanner(System.in);
+    static ArrayList<User> users = new ArrayList<>();
+    static ArrayList<Book> books = new ArrayList<>();
+    static int userIdCounter = 1;
+    static int bookIdCounter = 1;
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\n1. Create User \n2. Create Book \n3. View User \n4. Issue Book \n5. Exit");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); //
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter user name: ");
+                    String userName = scanner.nextLine();
+                    User user = new User(userIdCounter++, userName);
+                    System.out.println("User created:\n" + user);
+                    break;
+
+                case 2:
+                    System.out.print("Enter book name: ");
+                    String bookName = scanner.nextLine();
+                    Book book = new Book(bookIdCounter++, bookName);
+                    System.out.println("Book added:\n" + book);
+                    break;
+
+                case 3:
+                    System.out.print("Enter user ID: ");
+                    int id = scanner.nextInt();
+                    boolean found = false;
+                    for (User u : users) {
+                        if (u.userId == id) {
+                            System.out.println(u);
+                            found = true;
+                        }
+                    }
+                    if (!found) System.out.println("User not found.");
+                    break;
+
+                case 4:
+                    System.out.print("Enter book ID to issue: ");
+                    int bId = scanner.nextInt();
+                    System.out.print("Enter user ID to issue to: ");
+                    int uId = scanner.nextInt();
+                    Book targetBook = null;
+                    User targetUser = null;
+
+                    for (Book b : books) {
+                        if (b.bookId == bId) targetBook = b;
+                    }
+                    for (User u : users) {
+                        if (u.userId == uId) targetUser = u;
+                    }
+
+                    if (targetBook != null && targetUser != null) {
+                        if (!targetBook.isIssued)
+                            targetBook.issue(targetUser);
+                        else
+                            System.out.println("Book already issued");
+                    } else {
+                        System.out.println("Invalid ID");
+                    }
+                    break;
+
+                case 5:
+                    return;
+            }
+        }
+    }
+
+    static class User {
+        int userId;
+        String user;
+        int bookIssued;
+
+        User(int userId, String user) {
+            this.userId = userId;
+            this.user = user;
+            this.bookIssued = 0;
+            users.add(this);
+        }
+
+        @Override
+        public String toString() {
+            return "ID: " + userId + " | Name: " + user + " | Total Books Issued: " + bookIssued;
+        }
+    }
+
+    static class Book {
+        int bookId;
+        String bookName;
+        boolean isIssued;
+
+        Book(int bookId, String bookName) {
+            this.bookId = bookId;
+            this.bookName = bookName;
+            this.isIssued = false;
+            books.add(this);
+        }
+
+        void issue(User user) {
+            LocalDate issueDate = LocalDate.now();
+            isIssued = true;
+            user.bookIssued++;
+            System.out.println("Book '" + bookName + "' issued to " + user.user + " on " + issueDate);
+        }
+
+        @Override
+        public String toString() {
+            return "Book ID: " + bookId + " | Title: " + bookName + " | Issued: " + (isIssued ? "Yes" : "No");
+        }
+    }
+}
